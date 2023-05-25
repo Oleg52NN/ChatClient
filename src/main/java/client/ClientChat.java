@@ -10,10 +10,11 @@ import java.nio.file.Path;
 import java.util.Properties;
 
 public class ClientChat {
-    private static final String CHAT_DIR = "Chat\\";
+    protected static String fileSeparator = File.separator;
+    private static final String CHAT_DIR = "Chat" + fileSeparator;
     private static final String CONFIG_FILE = "client.cfg";
-    static final Path WORK_DIR = Path.of(System.getProperty("user.home") + "\\" + CHAT_DIR);
-    private static final Path CFG_FILE = Path.of(WORK_DIR + "\\" + CONFIG_FILE);
+    static final Path WORK_DIR = Path.of(System.getProperty("user.home") + fileSeparator + CHAT_DIR);
+    private static final Path CFG_FILE = Path.of(WORK_DIR + fileSeparator + CONFIG_FILE);
     private static final Properties properties = new Properties();
     private static int PORT;
     private static String HOST;
@@ -21,7 +22,8 @@ public class ClientChat {
 
     public static void main(String[] args) throws IOException {
         fileConfig();
-        new ClientWork(HOST, PORT);
+        ClientWork client = new ClientWork();
+        client.clientStart(HOST, PORT);
     }
 
     private static void fileConfig() throws IOException {

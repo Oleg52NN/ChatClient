@@ -9,19 +9,24 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static client.ClientChat.WORK_DIR;
+import static client.ClientChat.fileSeparator;
 import static java.nio.charset.StandardCharsets.*;
 
 class ClientWork {
     private static final String CLIENT_CHAT_LOG = "clientChat.log";
 
-    private static final Path CLIENT_CHAT_LOG_FILE = Path.of(WORK_DIR + "\\" + CLIENT_CHAT_LOG);
+    private static final Path CLIENT_CHAT_LOG_FILE = Path.of(WORK_DIR + fileSeparator + CLIENT_CHAT_LOG);
     private Socket socket;
     private BufferedReader in;
     private BufferedWriter out;
     private BufferedReader inputUser;
     private String nick;
 
-    public ClientWork(String addr, int port) {
+    public ClientWork() {
+
+    }
+
+    public void clientStart(String addr, int port) {
 
         try {
             this.socket = new Socket(addr, port);
